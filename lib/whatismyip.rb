@@ -8,7 +8,13 @@ class WhatIsMyIP < Sinatra::Base
   set :env,    :production
 
   before do
-    header 'X-Version' => VERSION
+    response.headers['X-Application'] = server_info.first
+    response.headers['X-Version']     = server_info.last
+
+    response.headers['Expires']       = "-1"
+    response.headers['Server']        = server_name
+
+    response.headers['Cache-Control'] = 'private, max-age=0'
   end
 
   get "/" do
@@ -18,6 +24,14 @@ class WhatIsMyIP < Sinatra::Base
 
   private
   def extract_remote_ip
-    request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
+    request.ip || request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
+  end
+
+  def server_info
+    [self.class.name, VERSION]
+  end
+
+  def server_name
+    server_info.join('/')
   end
 end
