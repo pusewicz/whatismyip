@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'logger'
 
 class WhatIsMyIP < Sinatra::Base
   VERSION = "1.0.0"
@@ -17,9 +18,19 @@ class WhatIsMyIP < Sinatra::Base
     response.headers['Cache-Control'] = 'private, max-age=0'
   end
 
-  get "/" do
+  get "/redir/*" do |path|
     content_type 'text/plain', :charset => 'utf-8'
-    extract_remote_ip
+    remote_ip = extract_remote_ip
+    url = params[:splat].join
+    log(remote_ip, path, url)
+    redirect url
+  end
+
+  get "*" do |path|
+    content_type 'text/plain', :charset => 'utf-8'
+    remote_ip = extract_remote_ip
+    log(remote_ip, path)
+    remote_ip
   end
 
   private
@@ -33,5 +44,14 @@ class WhatIsMyIP < Sinatra::Base
 
   def server_name
     server_info.join('/')
+  end
+
+  def logger
+    @logger ||= Logger.new(STDOUT)
+  end
+
+  def log(ip, path, redir = nil)
+    logger.info("Requested `#{path.inspect}' from `#{ip}'")
+    logger.info("Redirecting `#{ip}' to `#{redir}'") if redir
   end
 end
