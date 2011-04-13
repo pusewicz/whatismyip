@@ -1,3 +1,5 @@
 $LOAD_PATH.unshift "."
 
-require 'lib/whatismyip'
+require 'sinatra'
+
+load 'lib/logic.rb'
