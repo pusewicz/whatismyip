@@ -1,6 +1,6 @@
 VERSION = "1.0.0"
 
-set :public, File.expand_path('../public', __FILE__)
+set :public_folder, File.expand_path('../public', __FILE__)
 set :views,  File.expand_path('../public', __FILE__)
 set :env,    :production
 
