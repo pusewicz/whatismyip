@@ -1,0 +1,23 @@
+.row
+  .small-12.small-centered.columns
+    div class="panel callout radius"
+      h2 What is my IP address?
+
+      p Your IP address is:
+      p
+        pre
+          code= ip
+
+.row
+  .small-12.small-centered.columns
+    h3 Other responses
+
+    h4 Plain Text
+    p
+      pre
+        code curl -H "Accept: text/plain" https://yourip.herokuapp.com
+
+    h3 JSON
+    p
+      pre
+        code curl -H "Accept: application/json" https://yourip.herokuapp.com

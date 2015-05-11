@@ -1,15 +1,16 @@
 require 'sinatra/base'
+require 'json'
 
 class WhatIsMyIP < Sinatra::Base
-  VERSION = "1.0.0"
+  VERSION = "1.1.0"
 
   set :public_folder, File.expand_path('../public', __FILE__)
   set :views,  File.expand_path('../public', __FILE__)
   set :env,    :production
 
   before do
-    response.headers['X-Application'] = server_info.first
-    response.headers['X-Version']     = server_info.last
+    response.headers['Application'] = server_info.first
+    response.headers['Version']     = server_info.last
 
     response.headers['Expires']       = "-1"
     response.headers['Server']        = server_name
@@ -17,9 +18,20 @@ class WhatIsMyIP < Sinatra::Base
     response.headers['Cache-Control'] = 'private, max-age=0'
   end
 
-  get "*" do |path|
-    content_type 'text/plain', charset: 'utf-8'
-    extract_remote_ip
+  get '/' do
+    extracted_ip = extract_remote_ip
+
+    request.accept.each do |type|
+      case type.to_s
+      when 'text/html'
+        halt slim(:index, locals: { ip: extracted_ip, title: server_name })
+      when 'text/json', 'application/json'
+        halt %("#{extracted_ip}")
+      when 'text/plain'
+        halt extracted_ip
+      end
+    end
+    error 406
   end
 
   private
