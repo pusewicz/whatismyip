@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby '2.2.1'
+ruby File.read('.ruby-version')
 
 gem 'sinatra'
 gem 'slim'
