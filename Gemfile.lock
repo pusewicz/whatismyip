@@ -5,7 +5,7 @@ GEM
       thor (~> 0.19.1)
     mustermann (1.0.2)
     puma (3.12.0)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-protection (2.0.1)
       rack
     sinatra (2.0.1)
