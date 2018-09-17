@@ -1,8 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    foreman (0.85.0)
-      thor (~> 0.19.1)
     mustermann (1.0.3)
     puma (3.12.0)
     rack (2.0.5)
@@ -17,16 +15,13 @@ GEM
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
     temple (0.8.0)
-    thor (0.19.4)
     tilt (2.0.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  foreman
   puma
-  rack
   sinatra
   slim
 
@@ -34,4 +29,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
