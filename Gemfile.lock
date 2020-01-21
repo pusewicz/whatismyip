@@ -3,25 +3,26 @@ GEM
   specs:
     mustermann (1.0.3)
     puma (3.12.0)
-    rack (2.0.6)
-    rack-protection (2.0.4)
+    rack (2.0.7)
+    rack-protection (2.0.5)
       rack
-    sinatra (2.0.4)
+    sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.4)
+      rack-protection (= 2.0.5)
       tilt (~> 2.0)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
     temple (0.8.0)
-    tilt (2.0.8)
+    tilt (2.0.9)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   puma
+  rack (>= 2.0.6)
   sinatra
   slim
 
@@ -29,4 +30,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.2
+   1.17.1
