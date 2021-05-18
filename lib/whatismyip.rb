@@ -19,8 +19,7 @@ class WhatIsMyIP < Roda
       r.env['HTTP_ACCEPT'].split(',').each do |type|
         case type.to_s.chomp
         when 'text/html'
-          @content = render('index', layout: nil)
-          return render('layout')
+          return view('index')
         when 'text/json', 'application/json'
           return %("#{@extracted_ip}")
         when 'text/plain'
