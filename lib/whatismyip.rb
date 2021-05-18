@@ -1,50 +1,39 @@
-require 'sinatra/base'
+require 'roda'
 require 'json'
 
-class WhatIsMyIP < Sinatra::Base
+class WhatIsMyIP < Roda
   VERSION = "1.1.0"
 
-  set :public_folder, File.expand_path('../public', __FILE__)
-  set :views,  File.expand_path('../public', __FILE__)
-  set :env,    :production
+  plugin :default_headers, {
+    'Application' => self.class.name,
+    'Version' => VERSION,
+    'Expires'=> '-1',
+    'Cache-Control' => 'private, max-age=0'
+  }
+  plugin :render, engine: 'slim'
 
-  before do
-    response.headers['Application'] = server_info.first
-    response.headers['Version']     = server_info.last
+  route do |r|
+    r.root do
+      @extracted_ip = extract_remote_ip(r)
 
-    response.headers['Expires']       = "-1"
-    response.headers['Server']        = server_name
-
-    response.headers['Cache-Control'] = 'private, max-age=0'
-  end
-
-  get '/' do
-    extracted_ip = extract_remote_ip
-
-    request.accept.each do |type|
-      case type.to_s
-      when 'text/html'
-        halt slim(:index, locals: { ip: extracted_ip, title: server_name })
-      when 'text/json', 'application/json'
-        halt %("#{extracted_ip}")
-      when 'text/plain'
-        halt extracted_ip
+      r.env['HTTP_ACCEPT'].split(',').each do |type|
+        case type.to_s.chomp
+        when 'text/html'
+          @content = render('index', layout: nil)
+          return render('layout')
+        when 'text/json', 'application/json'
+          return %("#{@extracted_ip}")
+        when 'text/plain'
+          return @extracted_ip
+        end
       end
+      response.status = 406
     end
-    error 406
   end
 
   private
 
-  def extract_remote_ip
-    request.ip || request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
-  end
-
-  def server_info
-    [self.class.name, VERSION]
-  end
-
-  def server_name
-    server_info.join('/')
+  def extract_remote_ip(r)
+    r.ip || r.env['HTTP_X_REAL_IP'] || r.env['REMOTE_ADDR']
   end
 end
