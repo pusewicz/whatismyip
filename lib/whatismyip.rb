@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'roda'
-require 'json'
 
 class WhatIsMyIP < Roda
   VERSION = "1.1.0"
