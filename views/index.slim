@@ -1,23 +1,20 @@
-.row
-  .small-12.small-centered.columns
-    div class="panel callout radius"
-      h2 What is my IP address?
+h2 What is my IP address?
+p Your IP address is:
+p
+  pre
+    code= @extracted_ip
 
-      p Your IP address is:
-      p
-        pre
-          code= @extracted_ip
+h3 Other responses
 
-.row
-  .small-12.small-centered.columns
-    h3 Other responses
+h4 Plain Text
+p
+  pre
+    code curl -H "Accept: text/plain" https://yourip.herokuapp.com
 
-    h4 Plain Text
-    p
-      pre
-        code curl -H "Accept: text/plain" https://yourip.herokuapp.com
+h3 JSON
+p
+  pre
+    code curl -H "Accept: application/json" https://yourip.herokuapp.com
 
-    h3 JSON
-    p
-      pre
-        code curl -H "Accept: application/json" https://yourip.herokuapp.com
+footer
+  <a href="https://github.com/pusewicz/whatismyip/commit/#{ENV['SOURCE_VERSION']}">GitHub</a> &middot; <a href="https://www.layer22.com">layer|twenty|two</a>
