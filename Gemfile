@@ -8,6 +8,7 @@ gem 'roda'
 gem 'slim'
 
 group :development, :test do
+  gem 'rake'
   gem 'rspec'
   gem 'rack-test'
 end
