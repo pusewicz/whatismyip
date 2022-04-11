@@ -5,7 +5,7 @@ GEM
     puma (5.6.4)
       nio4r (~> 2.0)
     rack (2.2.3)
-    roda (3.44.0)
+    roda (3.54.0)
       rack
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
