@@ -17,17 +17,18 @@ class WhatIsMyIP < Roda
     r.root do
       @extracted_ip = extract_remote_ip(r)
 
-      r.env['HTTP_ACCEPT'].split(',').each do |type|
-        case type.to_s.chomp
-        when 'text/html'
-          return view('index')
-        when 'text/json', 'application/json'
-          return %("#{@extracted_ip}")
-        when 'text/plain'
-          return @extracted_ip
-        end
+      type = r.env['HTTP_ACCEPT']&.split(',')&.first
+      case type.to_s.chomp
+      when 'text/html'
+        return view('index')
+      when 'text/json', 'application/json'
+        return %("#{@extracted_ip}")
+      when 'text/plain'
+        return @extracted_ip
       end
+
       response.status = 406
+      view('index')
     end
   end
 

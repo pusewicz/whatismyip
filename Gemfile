@@ -6,3 +6,8 @@ gem 'puma'
 gem 'rack', '>= 2.0.6'
 gem 'roda'
 gem 'slim'
+
+group :development, :test do
+  gem 'rspec'
+  gem 'rack-test'
+end
