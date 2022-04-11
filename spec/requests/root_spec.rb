@@ -40,8 +40,8 @@ describe 'GET /', type: :request do
   context "plain requests" do
     before { get('/') }
 
-    it 'returns 406 HTTP status' do
-      expect(last_response.status).to eq 406
+    it 'returns 200 HTTP status' do
+      expect(last_response.status).to eq 200
     end
 
     it 'returns IP in the response body' do

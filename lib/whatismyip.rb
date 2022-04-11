@@ -19,16 +19,14 @@ class WhatIsMyIP < Roda
 
       type = r.env['HTTP_ACCEPT']&.split(',')&.first
       case type.to_s.chomp
-      when 'text/html'
-        return view('index')
       when 'text/json', 'application/json'
-        return %("#{@extracted_ip}")
+        %("#{@extracted_ip}")
       when 'text/plain'
-        return @extracted_ip
+        @extracted_ip
+      else
+        view('index')
       end
 
-      response.status = 406
-      view('index')
     end
   end
 
