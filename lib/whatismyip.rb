@@ -26,7 +26,11 @@ class WhatIsMyIP < Roda
       else
         view('index')
       end
+    end
 
+    r.get('robots.txt') do
+      response['Content-Type'] = 'text/plain'
+      "User-agent: *\r\nAllow: /"
     end
   end
 
