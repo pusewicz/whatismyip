@@ -25,11 +25,6 @@ class WhatIsMyIP < Roda
       r.html { view('index') }
     end
 
-    r.get('robots.txt') do
-      response['Content-Type'] = 'text/plain'
-      "User-agent: *\r\nAllow: /"
-    end
-
     r.get('sitemap') do
       response['Content-Type'] = 'application/xml'
 

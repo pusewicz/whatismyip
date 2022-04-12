@@ -8,7 +8,7 @@ describe 'GET /robots.txt', type: :request do
   end
 
   it 'allows all crawlers' do
-    expect(last_response.body).to eq "User-agent: *\r\nAllow: /"
+    expect(last_response.body).to eq "User-agent: *\nAllow: /\n"
   end
 
   it 'uses text content type' do
