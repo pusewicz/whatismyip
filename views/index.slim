@@ -1,17 +1,24 @@
+css:
+  .response {
+    color: var(--text-muted)
+  }
+
 h2 What is my IP address?
-p Your IP address is:
 pre
   code= @extracted_ip
 
-h3 Other responses
+details
+  summary Other types of responses
 
-h4 Plain Text
-pre
-  code curl -H "Accept: text/plain" https://yourip.herokuapp.com
+  h4 Plain Text
+  pre
+    code curl -H "Accept: text/plain" https://yourip.herokuapp.com
+    code.response #{@extracted_ip}
 
-h3 JSON
-pre
-  code curl -H "Accept: application/json" https://yourip.herokuapp.com
+  h3 JSON
+  pre
+    code curl -H "Accept: application/json" https://yourip.herokuapp.com
+    code.response "#{@extracted_ip}"
 
 footer
   <a href="https://github.com/pusewicz/whatismyip/">GitHub</a> &middot; <a href="https://www.layer22.com">layer|twenty|two</a>
