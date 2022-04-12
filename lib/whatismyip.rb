@@ -10,6 +10,7 @@ class WhatIsMyIP < Roda
     'Version' => VERSION,
     'Cache-Control' => 'no-store, max-age=0'
   }
+  plugin :public
   plugin :render, engine: 'slim'
   plugin :type_routing, types: { yaml: 'application/x-yaml', text: 'text/plain' }
 
@@ -45,6 +46,8 @@ class WhatIsMyIP < Roda
         </urlset>
       SITEMAP
     end
+
+    r.public
   end
 
   private
