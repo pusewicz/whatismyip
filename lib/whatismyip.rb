@@ -12,6 +12,7 @@ class WhatIsMyIP < Roda
     'Cache-Control' => 'private, max-age=0'
   }
   plugin :render, engine: 'slim'
+  plugin :type_routing, types: { yaml: 'application/x-yaml', text: 'text/plain' }
 
   route do |r|
     r.root do
@@ -31,6 +32,23 @@ class WhatIsMyIP < Roda
     r.get('robots.txt') do
       response['Content-Type'] = 'text/plain'
       "User-agent: *\r\nAllow: /"
+    end
+
+    r.get('sitemap') do
+      response['Content-Type'] = 'application/xml'
+
+      <<~SITEMAP
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+          <url>
+            <loc>http://yourip.herokuapp.com.com/</loc>
+            <lastmod>#{File.mtime(__FILE__).strftime("%F")}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>1</priority>
+          </url>
+        </urlset>
+      SITEMAP
     end
   end
 
