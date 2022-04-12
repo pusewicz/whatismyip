@@ -20,5 +20,15 @@ details
     code curl -H "Accept: application/json" https://yourip.herokuapp.com
     code.response "#{@extracted_ip}"
 
+  h3 XML
+  pre
+    code curl -H "Accept: application/xml" https://yourip.herokuapp.com
+    code.response &lt;ip&gt;#{@extracted_ip}&lt;/ip&gt;
+
+  h3 YAML
+  pre
+    code curl -H "Accept: application/x-yaml" https://yourip.herokuapp.com
+    code.response --- #{@extracted_ip}
+
 footer
   <a href="https://github.com/pusewicz/whatismyip/">GitHub</a> &middot; <a href="https://www.layer22.com">layer|twenty|two</a>

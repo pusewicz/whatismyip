@@ -18,15 +18,11 @@ class WhatIsMyIP < Roda
     r.root do
       @extracted_ip = extract_remote_ip(r)
 
-      type = r.env['HTTP_ACCEPT']&.split(',')&.first
-      case type.to_s.chomp
-      when 'text/json', 'application/json'
-        %("#{@extracted_ip}")
-      when 'text/plain'
-        @extracted_ip
-      else
-        view('index')
-      end
+      r.json { %("#{@extracted_ip}") }
+      r.yaml { %(--- #{@extracted_ip}\r\n) }
+      r.xml { %(<ip>#{@extracted_ip}</ip>) }
+      r.text { @extracted_ip }
+      r.html { view('index') }
     end
 
     r.get('robots.txt') do

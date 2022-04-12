@@ -25,6 +25,30 @@ describe 'GET /', type: :request do
     end
   end
 
+  context "yaml requests" do
+    before { get('/', nil, { 'HTTP_ACCEPT' => 'application/x-yaml' }) }
+
+    it 'returns 200 HTTP status' do
+      expect(last_response.status).to eq 200
+    end
+
+    it 'returns IP in the response body' do
+      expect(last_response.body).to eq "--- 127.0.0.1\r\n"
+    end
+  end
+
+  context "xml requests" do
+    before { get('/', nil, { 'HTTP_ACCEPT' => 'application/xml' }) }
+
+    it 'returns 200 HTTP status' do
+      expect(last_response.status).to eq 200
+    end
+
+    it 'returns IP in the response body' do
+      expect(last_response.body).to eq '<ip>127.0.0.1</ip>'
+    end
+  end
+
   context "text requests" do
     before { get('/', nil, { 'HTTP_ACCEPT' => 'text/plain' }) }
 
