@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'GET /', type: :request do
+describe 'GET /robots.txt', type: :request do
   before { get('/robots.txt') }
 
   it 'returns 200 HTTP status' do
