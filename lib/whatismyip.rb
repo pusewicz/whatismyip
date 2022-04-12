@@ -38,7 +38,7 @@ class WhatIsMyIP < Roda
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
           <url>
-            <loc>http://yourip.herokuapp.com.com/</loc>
+            <loc>https://yourip.herokuapp.com.com/</loc>
             <lastmod>#{File.mtime(__FILE__).strftime("%F")}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>1</priority>
