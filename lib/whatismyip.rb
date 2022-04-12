@@ -8,8 +8,7 @@ class WhatIsMyIP < Roda
   plugin :default_headers, {
     'Application' => self.class.name,
     'Version' => VERSION,
-    'Expires'=> '-1',
-    'Cache-Control' => 'private, max-age=0'
+    'Cache-Control' => 'no-store, max-age=0'
   }
   plugin :render, engine: 'slim'
   plugin :type_routing, types: { yaml: 'application/x-yaml', text: 'text/plain' }
