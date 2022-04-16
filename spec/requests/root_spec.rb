@@ -72,4 +72,16 @@ describe 'GET /', type: :request do
       expect(last_response.body).to include '127.0.0.1'
     end
   end
+
+  context "svg requests" do
+    before { get('/', nil, { 'HTTP_ACCEPT' => 'image/svg+xml' }) }
+
+    it 'returns 200 HTTP status' do
+      expect(last_response.status).to eq 200
+    end
+
+    it 'returns IP in the response body' do
+      expect(last_response.body).to include SVGStatus.new('127.0.0.1').to_svg
+    end
+  end
 end

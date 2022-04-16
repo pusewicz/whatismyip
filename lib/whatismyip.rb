@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'roda'
+require_relative "svg_status"
 
 class WhatIsMyIP < Roda
   VERSION = "1.1.0"
@@ -12,17 +13,18 @@ class WhatIsMyIP < Roda
   }
   plugin :public
   plugin :render, engine: 'slim'
-  plugin :type_routing, types: { yaml: 'application/x-yaml', text: 'text/plain' }
+  plugin :type_routing, types: { yaml: 'application/x-yaml', text: 'text/plain', svg: 'image/svg+xml' }
 
   route do |r|
     r.root do
       @extracted_ip = extract_remote_ip(r)
 
-      r.json { %("#{@extracted_ip}") }
-      r.yaml { %(--- #{@extracted_ip}\r\n) }
-      r.xml { %(<ip>#{@extracted_ip}</ip>) }
-      r.text { @extracted_ip }
       r.html { view('index') }
+      r.json { %("#{@extracted_ip}") }
+      r.svg { SVGStatus.new(@extracted_ip).to_svg }
+      r.text { @extracted_ip }
+      r.xml { %(<ip>#{@extracted_ip}</ip>) }
+      r.yaml { %(--- #{@extracted_ip}\r\n) }
     end
 
     r.get('sitemap') do
