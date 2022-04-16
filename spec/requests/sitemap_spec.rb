@@ -14,7 +14,7 @@ describe 'GET /sitemap.xml', type: :request do
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
         <url>
           <loc>https://yourip.herokuapp.com.com/</loc>
-          <lastmod>2022-04-12</lastmod>
+          <lastmod>#{File.mtime('lib/whatismyip.rb').strftime("%F")}</lastmod>
           <changefreq>weekly</changefreq>
           <priority>1</priority>
         </url>
