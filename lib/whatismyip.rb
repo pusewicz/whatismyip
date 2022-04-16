@@ -27,6 +27,13 @@ class WhatIsMyIP < Roda
       r.yaml { %(--- #{@extracted_ip}\r\n) }
     end
 
+    r.get(/ip(.svg)?/) do
+      @extracted_ip = extract_remote_ip(r)
+
+      r.svg { SVGStatus.new(@extracted_ip).to_svg }
+    end
+
+
     r.get('sitemap') do
       response['Content-Type'] = 'application/xml'
 
