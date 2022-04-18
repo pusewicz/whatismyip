@@ -5,6 +5,7 @@ require_relative "svg_status"
 
 class WhatIsMyIP < Roda
   VERSION = "1.1.0"
+  CSS = File.read('assets/style.min.css')
 
   plugin :default_headers, {
     'Application' => self.class.name,
