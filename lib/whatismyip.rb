@@ -9,30 +9,27 @@ class WhatIsMyIP < Roda
   plugin :default_headers, {
     'Application' => self.class.name,
     'Version' => VERSION,
-    'Cache-Control' => 'no-store, max-age=0'
+    'Cache-Control' => 'public, max-age=604800'
   }
   plugin :public
   plugin :render, engine: 'slim'
-  plugin :type_routing, types: { yaml: 'application/x-yaml', text: 'text/plain', svg: 'image/svg+xml' }
+  plugin :type_routing, types: { yaml: 'application/x-yaml', txt: 'text/plain', svg: 'image/svg+xml' }
 
   route do |r|
     r.root do
+      view('index')
+    end
+
+    r.get(/ip(\.svg|\.txt|\.json|\.yaml|\.xml)?/) do
+      response.headers['Cache-Control'] = 'private, max-age=604800, must-revalidate'
       @extracted_ip = extract_remote_ip(r)
 
-      r.html { view('index') }
       r.json { %("#{@extracted_ip}") }
       r.svg { SVGStatus.new(@extracted_ip).to_svg }
-      r.text { @extracted_ip }
+      r.txt { @extracted_ip }
       r.xml { %(<ip>#{@extracted_ip}</ip>) }
       r.yaml { %(--- #{@extracted_ip}\r\n) }
     end
-
-    r.get(/ip(.svg)?/) do
-      @extracted_ip = extract_remote_ip(r)
-
-      r.svg { SVGStatus.new(@extracted_ip).to_svg }
-    end
-
 
     r.get('sitemap') do
       response['Content-Type'] = 'application/xml'
