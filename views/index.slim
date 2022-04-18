@@ -5,36 +5,39 @@ css:
 
 h2 What is my IP address?
 pre
-  code= @extracted_ip
+  code.ip-address Fetching...
 
 details
   summary Other types of responses
 
   h3 Plain Text
   pre
-    code curl -H "Accept: text/plain" https://yourip.herokuapp.com
-    code.response #{@extracted_ip}
+    code curl https://yourip.herokuapp.com/ip.txt
+    code.response.ip-address Fetching...
 
   h3 JSON
   pre
-    code curl -H "Accept: application/json" https://yourip.herokuapp.com
-    code.response "#{@extracted_ip}"
+    code curl https://yourip.herokuapp.com/ip.json
+    code.response "<span class="ip-address"></span>"
 
   h3 XML
   pre
-    code curl -H "Accept: application/xml" https://yourip.herokuapp.com
-    code.response &lt;ip&gt;#{@extracted_ip}&lt;/ip&gt;
+    code curl https://yourip.herokuapp.com/ip.xml
+    code.response &lt;ip&gt;<span class="ip-address"></span>&lt;/ip&gt;
 
   h3 YAML
   pre
-    code curl -H "Accept: application/x-yaml" https://yourip.herokuapp.com
-    code.response --- #{@extracted_ip}
+    code curl https://yourip.herokuapp.com/ip.yaml
+    code.response --- <span class="ip-address"></span>
 
   h3 SVG
   pre
-    code curl -H "Accept: image/svg+xml" https://yourip.herokuapp.com
     code curl https://yourip.herokuapp.com/ip.svg
-    code.response== SVGStatus.new(@extracted_ip).to_svg
+    code.response
+      img src="/ip.svg"
 
 footer
   <a href="https://github.com/pusewicz/whatismyip/">GitHub</a> &middot; <a href="https://www.layer22.com">layer|twenty|two</a>
+
+javascript:
+  fetch("/ip.txt").then((response) => response.text()).then(text => document.querySelectorAll('.ip-address').forEach(node => node.innerText = text))
