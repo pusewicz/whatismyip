@@ -1,6 +1,6 @@
 # whatismyip
 
-The IP reporting service is available at https://yourip.herokuapp.com/.
+The IP reporting service is available at https://yourip.fly.dev.
 
 This tiny `rack`-based application returns the client's IP address.
 
