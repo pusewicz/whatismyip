@@ -10,23 +10,23 @@ It also returns plain text, JSON, XML and YAML responses.
 
 
 ```
-curl -H "Accept: text/plain" https://yourip.herokuapp.com
+curl -H "Accept: text/plain" https://yourip.fly.dev
 ```
 
 ## JSON
 
 ```
-curl -H "Accept: application/json" https://yourip.herokuapp.com
+curl -H "Accept: application/json" https://yourip.fly.dev
 ```
 
 ## XML
 
 ```
-curl -H "Accept: application/xml" https://yourip.herokuapp.com
+curl -H "Accept: application/xml" https://yourip.fly.dev
 ```
 
 ## YAML
 
 ```
-curl -H "Accept: application/x-yaml" https://yourip.herokuapp.com
+curl -H "Accept: application/x-yaml" https://yourip.fly.dev
 ```
