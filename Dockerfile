@@ -34,7 +34,7 @@ RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
 RUN gem install -N bundler -v ${BUNDLER_VERSION}
 
 COPY Gemfile* .ruby-version ./
-RUN bundle install &&  rm -rf vendor/bundle/ruby/*/cache
+RUN bundle install && rm -rf vendor/bundle/ruby/*/cache
 
 COPY . .
 
