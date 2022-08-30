@@ -43,13 +43,15 @@ FROM base
 RUN groupadd -g 2000 yourip \
     && useradd -m -u 2001 -g yourip yourip
 
-USER yourip
-
 COPY --from=build /app /app
 
 ARG GIT_REVISION
 ENV GIT_REVISION=$GIT_REVISION
 RUN echo $GIT_REVISION > /app/REVISION
+
+RUN chown -R yourip:yourip /app
+
+USER yourip
 
 # ENV RUBY_YJIT_ENABLE 1
 ENV PORT 8080
