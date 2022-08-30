@@ -9,7 +9,7 @@ class WhatIsMyIP < Roda
   INDEX_ETAG = Digest::SHA1.hexdigest(File.read('views/index.slim'))
 
   plugin :default_headers, {
-    'Application' => self.class.name,
+    'Application' => 'WhatIsMyIP',
     'Version' => VERSION,
     'Cache-Control' => 'public, max-age=604800'
   }
