@@ -44,6 +44,8 @@ COPY --from=build /app /app
 
 RUN groupadd -r app && useradd --no-log-init -r -g app postgres
 USER app
+
+ENV RUBY_YJIT_ENABLE 1
 ENV PORT 8080
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
