@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'roda'
+require 'digest/sha1'
+
 require_relative "svg_status"
 
 class WhatIsMyIP < Roda
