@@ -42,7 +42,7 @@ FROM base
 
 COPY --from=build /app /app
 
-RUN groupadd -r app && useradd --no-log-init -r -g app postgres
+RUN groupadd -r app && useradd --no-log-init -r -g app app
 USER app
 
 ENV RUBY_YJIT_ENABLE 1
