@@ -42,6 +42,8 @@ FROM base
 
 COPY --from=build /app /app
 
+RUN groupadd -r app && useradd --no-log-init -r -g app postgres
+USER app
 ENV PORT 8080
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
