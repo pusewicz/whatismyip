@@ -62,6 +62,6 @@ class WhatIsMyIP < Roda
   private
 
   def extract_remote_ip(r)
-    r.env['HTTP_FLY_CLIENT_IP'] || r.ip || r.env['HTTP_X_REAL_IP'] || r.env['REMOTE_ADDR']
+    r.ip || r.env['HTTP_X_REAL_IP'] || r.env['REMOTE_ADDR']
   end
 end
