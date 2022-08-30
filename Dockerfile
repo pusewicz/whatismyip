@@ -40,10 +40,10 @@ COPY . .
 
 FROM base
 
-RUN groupadd -g 2000 yourip \
-    && useradd -m -u 2001 -g yourip yourip
+# RUN groupadd -g 2000 yourip \
+#     && useradd -m -u 2001 -g yourip yourip
 
-USER yourip
+# USER yourip
 
 COPY --from=build /app /app
 
