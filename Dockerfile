@@ -40,10 +40,12 @@ COPY . .
 
 FROM base
 
-COPY --from=build /app /app
+RUN groupadd -g 2000 yourip \
+    && useradd -m -u 2001 -g yourip yourip
 
-RUN groupadd -r app && useradd --no-log-init -r -g app app
-USER app
+USER yourip
+
+COPY --from=build /app /app
 
 ENV RUBY_YJIT_ENABLE 1
 ENV PORT 8080
