@@ -37,7 +37,7 @@ details
       img height="20" src="/ip.svg"
 
 footer
-  <a href="https://github.com/pusewicz/whatismyip/">GitHub</a> &middot; <a href="https://www.layer22.com">layer|twenty|two</a>
+  <a href="https://github.com/pusewicz/whatismyip/">GitHub</a> &middot; <a href="https://www.layer22.com">layer|twenty|two</a> &middot; <a href="https://github.com/pusewicz/whatismyip/commit/#{REVISION}">#{REVISION[...7]}</a>
 
 javascript:
   fetch("/ip.txt").then((response) => response.text()).then(text => document.querySelectorAll('.ip-address').forEach(node => node.innerText = text))

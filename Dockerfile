@@ -47,6 +47,8 @@ FROM base
 
 COPY --from=build /app /app
 
+RUN echo $GIT_REVISION > /app/REVISION
+
 ENV RUBY_YJIT_ENABLE 1
 ENV PORT 8080
 
