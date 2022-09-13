@@ -6,6 +6,6 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods, type: :request
 
   def app
-    Rack::Builder.parse_file('config.ru').first
+    WhatIsMyIP.freeze.app
   end
 end
