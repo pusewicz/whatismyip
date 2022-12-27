@@ -9,7 +9,7 @@ class WhatIsMyIP < Roda
   VERSION = "1.1.0"
   CSS = File.read('assets/style.min.css')
   INDEX_ETAG = Digest::SHA1.hexdigest(File.read('views/index.slim'))
-  REVISION = File.exists?('REVISION') ? File.read('REVISION').chomp : 'dev'
+  REVISION = File.exist?('REVISION') ? File.read('REVISION').chomp : 'dev'
 
   plugin :default_headers, {
     'Application' => 'WhatIsMyIP',
