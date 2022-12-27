@@ -7,7 +7,8 @@ on:
     branches: [ master ]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   test:
@@ -27,3 +28,25 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run tests
       run: bundle exec rake
+
+  merge:
+    name: Auto-merge Dependabot PRs
+    needs: [test] # Wait for tests to pass
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+    steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.3.5
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Approve the PR
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Auto-merge the PR
+        run: gh pr merge --auto --rebase "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
