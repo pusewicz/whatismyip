@@ -24,10 +24,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.0)
-    slim (4.1.0)
-      temple (>= 0.7.6, < 0.9)
+    slim (5.0.0)
+      temple (~> 0.10.0)
       tilt (>= 2.0.6, < 2.1)
-    temple (0.8.2)
+    temple (0.10.0)
     tilt (2.0.11)
 
 PLATFORMS
