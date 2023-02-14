@@ -53,7 +53,7 @@ RUN chown -R yourip:yourip /app
 
 USER yourip
 
-# ENV RUBY_YJIT_ENABLE 1
+ENV RUBY_YJIT_ENABLE 1
 ENV PORT 8080
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
