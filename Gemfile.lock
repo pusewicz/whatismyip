@@ -24,10 +24,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.0)
-    slim (5.1.0)
+    slim (5.1.1)
       temple (~> 0.10.0)
-      tilt (>= 2.0.6, < 2.2)
-    temple (0.10.0)
+      tilt (>= 2.1.0)
+    temple (0.10.1)
     tilt (2.1.0)
 
 PLATFORMS
@@ -43,7 +43,7 @@ DEPENDENCIES
   slim
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.3.10
