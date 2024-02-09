@@ -1,8 +1,8 @@
 # syntax = docker/dockerfile:experimental
 
 ARG RUBY_VERSION
-ARG VARIANT=jemalloc-slim
-FROM quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-${VARIANT} as base
+ARG VARIANT=slim
+FROM ruby:${RUBY_VERSION}-${VARIANT} as base
 
 ARG BUNDLER_VERSION=2.5.6
 
