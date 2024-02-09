@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+echo "RAILS_ENV=${RAILS_ENV}"
+echo "Running command: ${@}"
+
+exec "${@}"
