@@ -1,10 +1,10 @@
 # syntax = docker/dockerfile:experimental
 
 ARG RUBY_VERSION
-ARG VARIANT=slim
-FROM ruby:${RUBY_VERSION}-${VARIANT} as base
+FROM ruby:${RUBY_VERSION} as base
 
 ARG BUNDLER_VERSION=2.5.6
+ARG RUBYGEMS_VERSION=3.5.6
 
 ARG RACK_ENV=production
 ENV RACK_ENV=${RACK_ENV}
@@ -32,6 +32,7 @@ RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
     apt-get install --no-install-recommends -y ${DEV_PACKAGES} \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
+RUN gem update --system ${RUBYGEMS_VERSION}
 RUN gem install -N bundler -v ${BUNDLER_VERSION}
 
 COPY Gemfile* .ruby-version ./
@@ -39,7 +40,12 @@ RUN bundle install && rm -rf vendor/bundle/ruby/*/cache
 
 COPY . .
 
+ARG RUBYGEMS_VERSION
+ARG BUNDLER_VERSION
 FROM base
+
+RUN gem update --system ${RUBYGEMS_VERSION}
+RUN gem install -N bundler -v ${BUNDLER_VERSION}
 
 RUN groupadd -g 2000 yourip \
     && useradd -m -u 2001 -g yourip yourip
