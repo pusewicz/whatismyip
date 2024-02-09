@@ -5,6 +5,8 @@ require 'digest/sha1'
 
 require_relative "svg_status"
 
+RubyVM::YJIT.enable
+
 class WhatIsMyIP < Roda
   VERSION = "1.1.0"
   CSS = File.read('assets/style.min.css')
