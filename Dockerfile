@@ -1,9 +1,10 @@
 # syntax = docker/dockerfile:experimental
+
 ARG RUBY_VERSION
 ARG VARIANT=jemalloc-slim
 FROM quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-${VARIANT} as base
 
-ARG BUNDLER_VERSION=2.4.7
+ARG BUNDLER_VERSION=2.5.6
 
 ARG RACK_ENV=production
 ENV RACK_ENV=${RACK_ENV}
@@ -53,7 +54,8 @@ RUN chown -R yourip:yourip /app
 
 USER yourip
 
-ENV RUBY_YJIT_ENABLE 1
 ENV PORT 8080
 
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+EXPOSE 8080
+CMD ["./bin/puma", "-C", "config/puma.rb"]
