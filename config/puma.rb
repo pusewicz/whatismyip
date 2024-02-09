@@ -13,5 +13,4 @@ if rails_env == "production"
   else
     preload_app!
   end
-  ::Process.warmup
 end
