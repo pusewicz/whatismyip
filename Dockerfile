@@ -56,6 +56,6 @@ USER yourip
 
 ENV PORT 8080
 
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+ENTRYPOINT ["/app/bin/docker-entrypoint"]
 EXPOSE 8080
 CMD ["./bin/puma", "-C", "config/puma.rb"]
