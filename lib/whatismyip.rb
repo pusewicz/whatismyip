@@ -40,23 +40,6 @@ class WhatIsMyIP < Roda
       r.yaml { %(--- #{@extracted_ip}\r\n) }
     end
 
-    r.get('sitemap') do
-      response['Content-Type'] = 'application/xml'
-
-      <<~SITEMAP
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-          <url>
-            <loc>https://yourip.fly.dev/</loc>
-            <lastmod>#{File.mtime(__FILE__).strftime("%F")}</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>1</priority>
-          </url>
-        </urlset>
-      SITEMAP
-    end
-
     r.public
   end
 
