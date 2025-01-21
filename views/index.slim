@@ -12,27 +12,27 @@ details
 
   h3 Plain Text
   pre
-    code curl https://yourip.fly.dev/ip.txt
+    code curl https://#{@remote_host}/ip.txt
     code.response.ip-address Fetching...
 
   h3 JSON
   pre
-    code curl https://yourip.fly.dev/ip.json
+    code curl https://#{@remote_host}/ip.json
     code.response "<span class="ip-address"></span>"
 
   h3 XML
   pre
-    code curl https://yourip.fly.dev/ip.xml
+    code curl https://#{@remote_host}/ip.xml
     code.response &lt;ip&gt;<span class="ip-address"></span>&lt;/ip&gt;
 
   h3 YAML
   pre
-    code curl https://yourip.fly.dev/ip.yaml
+    code curl https://#{@remote_host}/ip.yaml
     code.response --- <span class="ip-address"></span>
 
   h3 SVG
   pre
-    code curl https://yourip.fly.dev/ip.svg
+    code curl https://#{@remote_host}/ip.svg
     code.response
       img height="20" src="/ip.svg"
 
