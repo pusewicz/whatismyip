@@ -30,3 +30,7 @@ curl -H "Accept: application/xml" http://localhost:3000
 ```
 curl -H "Accept: application/x-yaml" http://localhost:3000
 ```
+
+## Deploy to Render
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
