@@ -24,6 +24,7 @@ class WhatIsMyIP < Roda
   route do |r|
     r.root do
       r.etag INDEX_ETAG
+      @remote_host = r.env['HTTP_HOST']
       view('index')
     end
 
