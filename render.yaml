@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: whatismyip
+    runtime: ruby
+    plan: free
+    buildCommand: "bundle install"
+    startCommand: "bundle exec puma -C config/puma.rb"
